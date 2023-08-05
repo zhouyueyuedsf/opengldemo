@@ -29,8 +29,6 @@
 //// 顶点着色
 //const GLchar* vertexShaderSource = "#version 330 core\n"
 //                                   "layout (location = 0) in vec3 position;\n"
-//                                   "layout (location = 1) in vec3 color;\n"
-//                                   "layout (location = 2) in vec2 texCoord;\n"
 //                                   "uniform mat4 transform;"
 //                                   "\n"
 //                                   "out vec3 ourColor;\n"
@@ -39,21 +37,14 @@
 //                                   "void main()\n"
 //                                   "{\n"
 //                                   "    gl_Position = transform * vec4(position, 1.0f);\n"
-//                                   "    ourColor = color;\n"
-//                                   "    TexCoord = texCoord;\n"
 //                                   "}";
 //// 片元着色
-//const GLchar* fragmentShaderSource = "#version 330 core\n"
-//                                     "in vec3 ourColor;\n"
-//                                     "in vec2 TexCoord;\n"
-//                                     "\n"
+//const GLchar* fragmentShaderSource = "\n"
 //                                     "out vec4 color;\n"
-//                                     "\n"
-//                                     "uniform sampler2D ourTexture;\n"
 //                                     "\n"
 //                                     "void main()\n"
 //                                     "{\n"
-//                                     "    color = texture(ourTexture, TexCoord);\n"
+//                                     "    color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
 //                                     "}";
 //
 //GLuint bindTexture();
@@ -89,47 +80,47 @@
 //    // Set up vertex data (and buffer(s)) and attribute pointers
 //    // 这个是压缩后的矩阵
 //    GLfloat vertices[] = {
-//            -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-//            0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-//            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-//            -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+//            -0.5f, -0.5f, -0.5f,
+//            0.5f, -0.5f, -0.5f,
+//            0.5f,  0.5f, -0.5f,
+//            0.5f,  0.5f, -0.5f,
+//            -0.5f,  0.5f, -0.5f,
+//            -0.5f, -0.5f, -0.5f,
 //
-//            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//            0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-//            0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-//            0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-//            -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-//            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//            -0.5f, -0.5f,  0.5f,
+//            0.5f, -0.5f,  0.5f,
+//            0.5f,  0.5f,  0.5f,
+//            0.5f,  0.5f,  0.5f,
+//            -0.5f,  0.5f,  0.5f,
+//            -0.5f, -0.5f,  0.5f,
 //
-//            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//            -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//            -0.5f,  0.5f,  0.5f,
+//            -0.5f,  0.5f, -0.5f,
+//            -0.5f, -0.5f, -0.5f,
+//            -0.5f, -0.5f, -0.5f,
+//            -0.5f, -0.5f,  0.5f,
+//            -0.5f,  0.5f,  0.5f,
 //
-//            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//            0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//            0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//            0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//            0.5f,  0.5f,  0.5f,
+//            0.5f,  0.5f, -0.5f,
+//            0.5f, -0.5f, -0.5f,
+//            0.5f, -0.5f, -0.5f,
+//            0.5f, -0.5f,  0.5f,
+//            0.5f,  0.5f,  0.5f,
 //
-//            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-//            0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-//            0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-//            0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-//            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-//            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//            -0.5f, -0.5f, -0.5f,
+//            0.5f, -0.5f, -0.5f,
+//            0.5f, -0.5f,  0.5f,
+//            0.5f, -0.5f,  0.5f,
+//            -0.5f, -0.5f,  0.5f,
+//            -0.5f, -0.5f, -0.5f,
 //
-//            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-//            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-//            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-//            -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-//            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+//            -0.5f,  0.5f, -0.5f,
+//            0.5f,  0.5f, -0.5f,
+//            0.5f,  0.5f,  0.5f,
+//            0.5f,  0.5f,  0.5f,
+//            -0.5f,  0.5f,  0.5f,
+//            -0.5f,  0.5f, -0.5f,
 //    };
 //    GLuint indices[] = { // 注意索引从0开始!
 //            0, 1, 3, // 第一个三角形
@@ -142,12 +133,10 @@
 //    // Setup OpenGL options
 //    glEnable(GL_DEPTH_TEST);
 //
-//    // 顶点着色器
 //    GLuint vertexShader;
 //    vertexShader = glCreateShader(GL_VERTEX_SHADER);
 //    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 //    glCompileShader(vertexShader);
-//    // 片元着色器
 //    GLuint fragmentShader;
 //    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 //    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
@@ -167,36 +156,36 @@
 //    GLuint VBO, VAO, EBO;
 //    glGenVertexArrays(1, &VAO);
 //    glGenBuffers(1, &VBO);
-//    glGenBuffers(1, &EBO);
+////    glGenBuffers(1, &EBO);
 //
 //    glBindVertexArray(VAO);
 //
 //    glBindBuffer(GL_ARRAY_BUFFER, VBO);
 //    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 //
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+////    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+////    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 //
 //    // Position attribute
-//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 //    glEnableVertexAttribArray(0);
-//    // Color attribute
-//    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-//    glEnableVertexAttribArray(1);
-//    // TexCoord attribute
-//    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
-//    glEnableVertexAttribArray(2);
+////    // Color attribute
+////    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+////    glEnableVertexAttribArray(1);
+////    // TexCoord attribute
+////    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+////    glEnableVertexAttribArray(2);
 //
 //    glBindVertexArray(0); // Unbind VAO// Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
 //
 //
-//    int iw, ih;
-//    unsigned char* image = SOIL_load_image("/Users/bytedance/CLionProjects/untitled/container.jpeg", &iw, &ih, 0, SOIL_LOAD_RGB);
-//
-//    // 生成纹理
-//    GLuint texture = bindTexture();
-//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iw, ih, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-//    glGenerateMipmap(GL_TEXTURE_2D);
+////    int iw, ih;
+////    unsigned char* image = SOIL_load_image("/Users/bytedance/CLionProjects/untitled/container.jpeg", &iw, &ih, 0, SOIL_LOAD_RGB);
+////
+////    // 生成纹理
+////    GLuint texture = bindTexture();
+////    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iw, ih, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+////    glGenerateMipmap(GL_TEXTURE_2D);
 //
 //
 //
@@ -239,11 +228,11 @@
 //            model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
 //            GLint modelLoc = glGetUniformLocation(shaderProgram, "modelLoc");
 //
+//
 //            glm::mat4 transform = projection * view * model;
 //            // Get matrix's uniform location and set matrix
 //            GLint transformLoc = glGetUniformLocation(shaderProgram, "transform");
 //            glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
-//
 //            glDrawArrays(GL_TRIANGLES, 0, 36);
 //        }
 //        glBindVertexArray(0);
