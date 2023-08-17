@@ -3,9 +3,10 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(untitled main.cpp drawcube.cpp main_dev.cpp drawTriangle.cpp drawlight.cpp drawlight_basic.cpp)
+add_executable(${PROJECT_NAME} main.cpp drawcube.cpp main_dev.cpp drawTriangle.cpp drawlight.cpp drawlight_basic.cpp drawTexture.cpp)
+
 target_link_libraries(untitled /Users/bytedance/sdk/glfw-3.3.8/lib-arm64/libglfw.3.dylib)
-target_include_directories(untitled PUBLIC /Users/bytedance/sdk/glfw-3.3.8/include)
+target_include_directories(${PROJECT_NAME} PUBLIC /Users/bytedance/sdk/glfw-3.3.8/include/)
 
 target_link_libraries(untitled /Users/bytedance/sdk/glew-2.2.0/build/lib/libGLEW.2.2.0.dylib)
 target_link_libraries(untitled /Users/bytedance/sdk/glew-2.2.0/build/lib/libGLEW.2.2.dylib)

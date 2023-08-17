@@ -217,7 +217,7 @@
 //        glActiveTexture(GL_TEXTURE1);
 //        double timeSecond = glfwGetTime();
 //        glm::mat4 projection(glm::mat4(1.0f));
-//        projection = glm::perspective(45.0f, width * 1.0f / height, 0.1f, 100.0f);
+//        projection = glm::perspective(glm::radians(45.0f), width * 1.0f / height, 0.1f, 100.0f);
 //
 //        GLfloat radius = 10.0f;
 //        GLfloat camX = sin(timeSecond) * radius;
